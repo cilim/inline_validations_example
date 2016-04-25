@@ -1,0 +1,33 @@
+<%= form_for @post, html: {class: 'js_inline_validate'}, data: {validate_url: validate_posts_path} do |f| %>
+<% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: 'js_validate_me js_post_name' %>
+  </div>
+  <div class="field">
+    <%= f.label :author %><br>
+    <%= f.text_field :author, class: 'js_validate_me js_post_author' %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.select :category, Post::CATEGORIES %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: 'js_validate_me js_post_description' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
